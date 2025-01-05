@@ -17,8 +17,12 @@ public class SecurityConfig {
 			corsConfig.addAllowedHeader("*");
 			corsConfig.setAllowCredentials(true);
 			return corsConfig;
-		})).csrf(csrf -> csrf.disable()).authorizeHttpRequests(
-				auth -> auth.requestMatchers("/", "/register", "/signin").permitAll().anyRequest().authenticated());
+		})).csrf(csrf -> csrf.disable())
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/", "/register", "/signin", "/h2-console/**")
+						.permitAll().anyRequest().authenticated())
+				// NEW WAY to allow frame options for H2 Console
+				.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
+
 		return http.build();
 	}
 }

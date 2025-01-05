@@ -84,6 +84,9 @@ export default function AuthProvider({children}){
 }
     */
 
+// secund change 
+
+/*
 import { createContext, useState, useContext } from "react";
 import { executeBasicAuth } from "../api/AuthApiService";
 
@@ -114,6 +117,62 @@ export default function AuthProvider({ children }) {
         }
     }
 
+    function logout() {
+        setAuth(false);
+        setUsername(null);
+    }
+
+    return (
+        <AuthContext.Provider value={{ isAuth, login, logout, username }}>
+            {children}
+        </AuthContext.Provider>
+    );
+}*/
+
+
+import { createContext, useState, useContext } from "react";
+
+export const AuthContext = createContext();
+export const useAuth = () => useContext(AuthContext);
+
+export default function AuthProvider({ children }) {
+    const [isAuth, setAuth] = useState(false);
+    const [username, setUsername] = useState(null);
+
+    // Login function that makes a POST request to your backend API
+    async function login(username, password) {
+        try {
+            const response = await fetch('http://localhost:8080/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+                credentials: 'include', // for cookies
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Login successful:", data);
+                setUsername(username);
+                setAuth(true);
+                return true;
+            } else {
+                console.log("Login failed:", response);
+                setAuth(false);
+                return false;
+            }
+        } catch (error) {
+            console.log("Error during login:", error);
+            setAuth(false);
+            return false;
+        }
+    }
+
+    // Logout function
     function logout() {
         setAuth(false);
         setUsername(null);
