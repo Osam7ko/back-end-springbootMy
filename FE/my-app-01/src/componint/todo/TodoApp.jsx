@@ -10,6 +10,11 @@ import WelcomeComponent from './shild-component/WelcomeComponent'
 import AuthProvider,{useAuth} from './security/AuthContext'
 import LoginComponent from './shild-component/LoginComponent'
 import TodoCompo from './shild-component/TodoCompo'
+import ListProduct from './shild-component/product/ListProduct'
+import AddProduct from './shild-component/product/AddProduct';
+import EditProductComponent from './shild-component/product/EditProductComponent'
+import SellProductComponent from './shild-component/product/SellProduct'
+
 
 
 function AuthenticatedRoute({children}){
@@ -41,6 +46,26 @@ export default function TodoApp(){
                         <Route path='/Todos' element={
                             <AuthenticatedRoute>
                                 <ListTodosComponent/>
+                            </AuthenticatedRoute>
+                            }/>
+                        <Route path='/Product' element={
+                            <AuthenticatedRoute>
+                                <ListProduct/>
+                            </AuthenticatedRoute>
+                            }/>
+                        <Route path='/add-product' element={
+                            <AuthenticatedRoute>
+                                <AddProduct/>
+                            </AuthenticatedRoute>
+                            }/>
+                        <Route path='/product/:id' element={
+                            <AuthenticatedRoute>
+                                <EditProductComponent />
+                            </AuthenticatedRoute>
+                            }/>
+                        <Route path='/sell-product' element={
+                            <AuthenticatedRoute>
+                                <SellProductComponent />
                             </AuthenticatedRoute>
                             }/>
                         <Route path='/todo/:id' element={

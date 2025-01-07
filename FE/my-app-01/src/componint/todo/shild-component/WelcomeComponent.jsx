@@ -64,6 +64,7 @@ export default function WelcomeComponent(){
                     <Clock/>
                 </div>
                 <div>Your Todos <Link to='/Todos'>Go Here</Link></div>
+                <div>Your Product <Link to='/Product'>Go Here</Link></div>
                 <button className='btn btn-success m-5' onClick={callHelloWorldApi}>
                     Cell Hello World Rest Api
                 </button>

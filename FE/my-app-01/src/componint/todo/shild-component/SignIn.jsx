@@ -212,6 +212,7 @@ export default function SignInComponent() {
 
 
 // fourth with Auth
+// task add confirm password
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -295,6 +296,16 @@ export default function SignInComponent() {
                         onChange={handlePasswordChange}
                     />
                 </div>
+                {/* <div className="mb-3">
+                    <label className="form-label">Confirm Password</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Enter your password again"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                </div> */}
                 {errorMessage && (
                     <div className="alert alert-danger" role="alert">
                         {errorMessage}
